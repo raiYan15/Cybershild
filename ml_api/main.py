@@ -27,23 +27,15 @@ ML_DIR = Path(__file__).parent
 
 MODEL_CANDIDATES = [
     ML_DIR / "model.pkl",
-    ML_DIR / "model (1).pkl",
-    ML_DIR.parent / "model.pkl",
-    ML_DIR.parent / "model (1).pkl",
 ]
 VECTORIZER_CANDIDATES = [
     ML_DIR / "vectorizer.pkl",
-    ML_DIR / "vectorizer (1).pkl",
-    ML_DIR.parent / "vectorizer.pkl",
-    ML_DIR.parent / "vectorizer (1).pkl",
 ]
 HINDI_MODEL_CANDIDATES = [
     ML_DIR / "hindi_abuse_model.pkl",
-    ML_DIR.parent / "hindi_abuse_model.pkl",
 ]
 HINDI_VECTORIZER_CANDIDATES = [
     ML_DIR / "hindi_vectorizer.pkl",
-    ML_DIR.parent / "hindi_vectorizer.pkl",
 ]
 
 # ─── Globals ──────────────────────────────────────────────────────────────────
