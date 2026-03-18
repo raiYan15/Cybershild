@@ -484,11 +484,11 @@ def load_artifacts() -> None:
         if model_path and vectorizer_path:
             model = joblib.load(model_path)
             vectorizer = joblib.load(vectorizer_path)
-            print(f"[CyberShield] ✓ English ML model loaded: {model_path.name}")
+            print(f"[CyberShield] [OK] English ML model loaded: {model_path.name}")
         else:
-            print("[CyberShield] ⚠ English ML model not found – using heuristic fallback")
+            print("[CyberShield] [WARN] English ML model not found - using heuristic fallback")
     except Exception as exc:
-        print(f"[CyberShield] ✗ English ML model load error: {exc}")
+        print(f"[CyberShield] [ERROR] English ML model load error: {exc}")
 
     # 2. Hindi abuse model
     try:
@@ -497,20 +497,20 @@ def load_artifacts() -> None:
         if hindi_model_path and hindi_vec_path:
             hindi_model = joblib.load(hindi_model_path)
             hindi_vectorizer = joblib.load(hindi_vec_path)
-            print(f"[CyberShield] ✓ Hindi ML model loaded: {hindi_model_path.name}")
+            print(f"[CyberShield] [OK] Hindi ML model loaded: {hindi_model_path.name}")
         else:
-            print("[CyberShield] ⚠ Hindi ML model not found – using heuristic fallback for Hindi")
+            print("[CyberShield] [WARN] Hindi ML model not found - using heuristic fallback for Hindi")
     except Exception as exc:
-        print(f"[CyberShield] ✗ Hindi ML model load error: {exc}")
+        print(f"[CyberShield] [ERROR] Hindi ML model load error: {exc}")
 
     # 3. OpenAI Whisper
     try:
         import whisper
         whisper_model = whisper.load_model("tiny")
-        print("[CyberShield] ✓ Whisper STT loaded (tiny)")
+        print("[CyberShield] [OK] Whisper STT loaded (tiny)")
     except Exception as exc:
         whisper_model = None
-        print(f"[CyberShield] ⚠ Whisper unavailable: {exc}")
+        print(f"[CyberShield] [WARN] Whisper unavailable: {exc}")
 
     # 4. HuggingFace Emotion classifier
     try:
@@ -520,10 +520,10 @@ def load_artifacts() -> None:
             model="j-hartmann/emotion-english-distilroberta-base",
             return_all_scores=False,
         )
-        print("[CyberShield] ✓ Emotion pipeline loaded")
+        print("[CyberShield] [OK] Emotion pipeline loaded")
     except Exception as exc:
         emotion_pipeline = None
-        print(f"[CyberShield] ⚠ Emotion pipeline unavailable: {exc}")
+        print(f"[CyberShield] [WARN] Emotion pipeline unavailable: {exc}")
 
 
 # ─── Routes ───────────────────────────────────────────────────────────────────

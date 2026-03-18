@@ -2,7 +2,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 const mlApi = axios.create({
-  baseURL: process.env.ML_API_URL || 'http://localhost:8000',
+  baseURL: process.env.ML_API_URL || `http://127.0.0.1:${process.env.ML_INTERNAL_PORT || 8000}`,
   timeout: 60000, // voice prediction takes longer
 });
 

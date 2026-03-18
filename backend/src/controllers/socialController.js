@@ -1,11 +1,10 @@
 import Post from '../models/Post.js';
 import Comment from '../models/Comment.js';
-import axios from 'axios';
 import User from '../models/User.js';
 import Violation from '../models/Violation.js';
 import ModerationLog from '../models/ModerationLog.js';
+import { predictMessage } from '../services/mlClient.js';
 
-const ML_API_URL = process.env.ML_API_URL || 'http://localhost:8000/predict';
 const VIOLATION_THRESHOLD = 3;
 const AUTO_SUSPEND_CREDIBILITY_THRESHOLD = 20;
 
@@ -41,10 +40,10 @@ export const createPost = async (req, res) => {
     let abusiveWords = [];
 
     try {
-      const mlResponse = await axios.post(ML_API_URL, { text: content });
-      isBullying = mlResponse.data.prediction === 1;
-      toxicityScore = mlResponse.data.toxicity_score;
-      abusiveWords = mlResponse.data.abusive_words;
+      const mlResponse = await predictMessage(content);
+      isBullying = mlResponse.prediction === 1;
+      toxicityScore = mlResponse.toxicityScore;
+      abusiveWords = mlResponse.abusiveWords;
     } catch (mlError) {
       console.error('ML API Error during post creation:', mlError.message);
     }
@@ -133,10 +132,10 @@ export const addComment = async (req, res) => {
     let abusiveWords = [];
 
     try {
-      const mlResponse = await axios.post(ML_API_URL, { text: content });
-      isBullying = mlResponse.data.prediction === 1;
-      toxicityScore = mlResponse.data.toxicity_score;
-      abusiveWords = mlResponse.data.abusive_words;
+      const mlResponse = await predictMessage(content);
+      isBullying = mlResponse.prediction === 1;
+      toxicityScore = mlResponse.toxicityScore;
+      abusiveWords = mlResponse.abusiveWords;
     } catch (mlError) {
       console.error('ML API Error during comment creation:', mlError.message);
     }

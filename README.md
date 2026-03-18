@@ -6,7 +6,7 @@ Production-style full-stack app with React + Express + MongoDB + FastAPI ML infe
 
 - `frontend/` – React + Vite + Tailwind + Framer Motion + Recharts
 - `backend/` – Express API with MongoDB storage and analytics
-- `ml_api/` – FastAPI inference service using `model.pkl` and `vectorizer.pkl`
+- `ml_api/` – FastAPI inference service source used by the backend (auto-started by backend)
 
 ## Environment Variables
 
@@ -24,21 +24,15 @@ You can also copy:
 
 ## Run Locally
 
-### 1) ML API
-
-From `ml_api/`:
-
-- Install dependencies from `requirements.txt`
-- Run FastAPI with uvicorn on port `8000`
-
-### 2) Backend API
+### 1) Backend API (includes ML API runtime)
 
 From `backend/`:
 
 - Install dependencies
-- Start server on port `5000`
+- Ensure Python + `ml_api/requirements.txt` dependencies are installed
+- Start server on port `5000` (backend auto-starts embedded ML API on `ML_INTERNAL_PORT`)
 
-### 3) Frontend
+### 2) Frontend
 
 From `frontend/`:
 
@@ -53,7 +47,7 @@ From `frontend/`:
 - `POST /save`
 - `GET /analytics`
 
-### ML API
+### ML API (served internally by backend-managed process)
 
 - `POST /predict`
 - `GET /health`
